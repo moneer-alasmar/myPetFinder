@@ -229,12 +229,47 @@ var global = arguments[3];
 
   module.exports = fetchJsonp;
 });
+},{}],"js\\validate.js":[function(require,module,exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.isValidZip = isValidZip;
+exports.showAlert = showAlert;
+// validate zip code
+function isValidZip() {
+  return (/^\d{5}(-\d{4})?$/.test(zip)
+  );
+}
+
+// display alert
+function showAlert(message, className) {
+  // create div
+  var div = document.createElement('div');
+  // add classes
+  div.className = 'alert alert-' + className;
+  // add text
+  div.appendChild(document.createTextNode(message));
+  // get container
+  var container = document.querySelector('.container');
+  // get form
+  var form = document.querySelector('#pet-form');
+  // insert alert
+  container.insertBefore(div, form);
+
+  setTimeout(function () {
+    return document.querySelector('.alert').remove();
+  }, 3000);
+}
 },{}],"js\\main.js":[function(require,module,exports) {
 'use strict';
 
 var _fetchJsonp = require('fetch-jsonp');
 
 var _fetchJsonp2 = _interopRequireDefault(_fetchJsonp);
+
+var _validate = require('./validate');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -249,6 +284,12 @@ function fetchAnimals(e) {
   // get user input
   var animal = document.querySelector('#animal').value;
   var zip = document.querySelector('#zip').value;
+
+  // validate Zip
+  if (!(0, _validate.isValidZip)(zip)) {
+    (0, _validate.showAlert)('Please Enter A Valid Zip', 'danger');
+    return;
+  }
 
   // fetch pets
   (0, _fetchJsonp2.default)('http://api.petfinder.com/pet.find?format=json&key=e9334db43b1433c7b66627cd8edd2929&animal=' + animal + '&location=' + zip + '&callback=callback', {
@@ -284,7 +325,7 @@ function showAnimals(pets) {
     results.appendChild(div);
   });
 }
-},{"fetch-jsonp":"node_modules\\fetch-jsonp\\build\\fetch-jsonp.js"}],"C:\\Users\\Moneer\\AppData\\Roaming\\npm\\node_modules\\parcel-bundler\\src\\builtins\\hmr-runtime.js":[function(require,module,exports) {
+},{"fetch-jsonp":"node_modules\\fetch-jsonp\\build\\fetch-jsonp.js","./validate":"js\\validate.js"}],"C:\\Users\\Moneer\\AppData\\Roaming\\npm\\node_modules\\parcel-bundler\\src\\builtins\\hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 
