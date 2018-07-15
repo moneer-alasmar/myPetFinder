@@ -238,7 +238,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.isValidZip = isValidZip;
 exports.showAlert = showAlert;
 // validate zip code
-function isValidZip() {
+function isValidZip(zip) {
   return (/^\d{5}(-\d{4})?$/.test(zip)
   );
 }
@@ -354,7 +354,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '50251' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '54586' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
